@@ -40,25 +40,25 @@ Acceptance Criteria:
 	Send an alert message/notification to the mobile whenever the temperature/humidity rises above the threshold level. 
 # Misuser Stories:
 
-•	As a bad competitor in storage mart/ cold cargo business, I want to get access to the other strong competitor metawear device by sending multiple request, so I can destroy functioning of the device.
+# •	As a bad competitor in storage mart/ cold cargo business, I want to get access to the other strong competitor metawear device by sending multiple request, so I can destroy functioning of the device.
 
 Mitigation techniques:
 
-o	Bluetooth should be turned on only whenever we required.
+  1. Bluetooth should be turned on only whenever we required.
 
-o	To get the data, we can use web services instead of Bluetooth.
+  2. To get the data, we can use web services instead of Bluetooth.
 
-•	As a misuser, I want to sniff the data, so I can change the values in the log file.
+# •	As a misuser, I want to sniff the data, so I can change the values in the log file.
 
 Mitigation techniques:
 
 o	Log files should be encrypted, so that who has no authorization cannot access the files.
 
-•	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
+# •	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
 
 Mitigation techniques:
 
-o	Must update the android operating system to avoid any vulnerabilities in OS.
+  1. Must update the android operating system to avoid any vulnerabilities in OS.
 
 # DESIGN
 
@@ -67,33 +67,33 @@ o	Must update the android operating system to avoid any vulnerabilities in OS.
 
 # Components List
 
-1.	Android device:
+# 1.	Android device:
 
-1.1.	Developed application (. apk) is stored in the mobile device.
+    1.1.	Developed application (. apk) is stored in the mobile device.
 
-1.2.	Device Bluetooth is used to connect with the metawear device.
+    1.2.	Device Bluetooth is used to connect with the metawear device.
 
-1.3.	Other features of the android device are used, such as alerts/push notification.
+    1.3.	Other features of the android device are used, such as alerts/push notification.
 
-1.4.	An metawear sdk (metawear interface) will be downloaded into the android device to communicate with the metawear.
+    1.4.	An metawear sdk (metawear interface) will be downloaded into the android device to communicate with the metawear.
 
-2.	Native mobile application:
+# 2.	Native mobile application:
 
 Our application essentially does three main tasks
 
-2.1	Application connects to the metawear device to stream the data (temperature and humidity) from the android device.
+    2.1	Application connects to the metawear device to stream the data (temperature and humidity) from the android device.
 
-2.2	As the data streams to the log file stored on the device, application will read the .CSV file constantly and checks the values against the threshold limit. log files are stored to the android device.
+    2.2	As the data streams to the log file stored on the device, application will read the .CSV file constantly and checks the values against the threshold limit. log files are stored to the android device.
 
-2.3	When the temperature and humidity levels reached the threshold limit, application will notify the user with alerts/push notification.
+    2.3	When the temperature and humidity levels reached the threshold limit, application will notify the user with alerts/push notification.
 
-3.	Metawear device:
+# 3.	Metawear device:
 
-3.1	Bluetooth feature in the android device is used to connect with the Bluetooth LE on the metawear device. 
+    3.1	Bluetooth feature in the android device is used to connect with the Bluetooth LE on the metawear device. 
 
-3.2	In this device we use BME280 humidity/pressure sensor to track the humidity level similarly, we use thermistor sensor which tracks the temperature.
+    3.2	In this device we use BME280 humidity/pressure sensor to track the humidity level similarly, we use thermistor sensor which tracks the temperature.
 
-3.3	BME280 humidity/pressure and temperature sensors are connected to the Bluetooth LE. 
+    3.3	BME280 humidity/pressure and temperature sensors are connected to the Bluetooth LE. 
 
 # SECURITY ANALYSIS:
 
