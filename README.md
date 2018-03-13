@@ -22,7 +22,7 @@ This project will mainly help in the emergency conditions in our houses. We migh
 	We can also use this application to monitor humidity level in our house mainly in winter season.
 # APPLICATION REQUIREMENTS
 # User Stories:
-1.	As someone who needs to store things only in freezing conditions, I want to know the temperature update in timely manner. So that I can act immediately before things gets destroyed.
+•	As someone who needs to store things only in freezing conditions, I want to know the temperature update in timely manner. So that I can act immediately before things gets destroyed.
 
 Acceptance Criteria:
 
@@ -30,7 +30,7 @@ Acceptance Criteria:
 
 	Send an alert message when the temperature reaches threshold point with LED notification.
 
-2.	As the patients who are in emergency/ICU condition cannot respond to the drop in the temperature or humidity levels, I want to know the update of the temperature and humidity levels in the room. So that we can make sure the patient condition and act accordingly.
+•	As the patients who are in emergency/ICU condition cannot respond to the drop in the temperature or humidity levels, I want to know the update of the temperature and humidity levels in the room. So that we can make sure the patient condition and act accordingly.
 
 Acceptance Criteria:
 
