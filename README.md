@@ -13,7 +13,7 @@ It seems interesting for me because this application serves in general purpose a
 	Tracking the temperature and humidity in the storage facilities, patient rooms (emergency rooms) and cold cargos.
 
 # Project Merits:
-This project will mainly help in the emergency conditions in our houses. We might not know if the temperature system fails to work in one of the room in the house in midnight time. It might lead to death conditions if temperature increases to 100F. In such conditions this application will help you by giving alert message with vibration and LED light indication.
+This project will mainly help in the emergency conditions in our houses. We might not know if the temperature system fails to work in one of the room in the house in midnight time. It might lead to death conditions if temperature increases to 100F. In such conditions this application will help you by giving alert message with vibration and LED light indication. This application will be very helpful in cold cargos. They can keep track of temperature constantly, if anything goes wrong then they act immediately before goods in the cargo get destroyed. Similarly, there are many business areas where this application can be used before anything occurs bad.
 
 	This project is designed for multipurpose uses. This application can be used in general areas to business areas.
 
