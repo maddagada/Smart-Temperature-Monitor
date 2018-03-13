@@ -21,8 +21,8 @@ This project will mainly help in the emergency conditions in our houses. We migh
 	This project is designed specifically to track the temperature and humidity levels in the cold storage facilities, cold cargos and in the hospital’s emergency/ICU patient rooms.
 
 	We can also use this application to monitor humidity level in our house mainly in winter season.
-#APPLICATION REQUIREMENTS
-#User Stories:
+# APPLICATION REQUIREMENTS
+# User Stories:
 1.	As someone who needs to store things only in freezing conditions, I want to know the temperature update in timely manner. So that I can act immediately before things gets destroyed.
 
 Acceptance Criteria:
@@ -38,7 +38,7 @@ Acceptance Criteria:
 	Track the temperature and humidity levels in timely manner.
 
 	Send an alert message/notification to the mobile whenever the temperature/humidity rises above the threshold level. 
-#Misuser Stories:
+# Misuser Stories:
 
 •	As a bad competitor in storage mart/ cold cargo business, I want to get access to the other strong competitor metawear device by sending multiple request, so I can destroy functioning of the device.
 
@@ -60,12 +60,12 @@ Mitigation techniques:
 
 o	Must update the android operating system to avoid any vulnerabilities in OS.
 
-#DESIGN
+# DESIGN
 
 ![alt text](https://github.com/maddagada/Smart-Temperature-Humid-Controller/blob/master/Images/Architecture.PNG)
 
 
-#Components List
+# Components List
 
 1.	Android device:
 
@@ -95,6 +95,6 @@ Our application essentially does three main tasks
 
 3.3	BME280 humidity/pressure and temperature sensors are connected to the Bluetooth LE. 
 
-#SECURITY ANALYSIS:
+# SECURITY ANALYSIS:
 
 ![alt text](https://github.com/maddagada/Smart-Temperature-Humid-Controller/blob/master/Images/Security%20Analysis%20Table.PNG)
