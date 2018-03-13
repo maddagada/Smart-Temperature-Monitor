@@ -59,7 +59,7 @@ Mitigation techniques:
 
   1. Must update the android operating system to avoid any vulnerabilities in OS.
 
-# DESIGN
+# Architecture
 
 ![alt text](https://github.com/maddagada/Smart-Temperature-Humid-Controller/blob/master/Images/Architecture.PNG)
 
