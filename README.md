@@ -6,13 +6,12 @@ It seems interesting for me because this application serves in general purpose a
 # Project Goals and Objectives:
 	Develop a native app which is integrated to the metawear device (IoT device) to track the temperature and humidity changes.
 
-	Sending alert message about temperature and humidity drops to the user’s android phone.
+	Sending alert message to the user about temperature and humidity level changes when they reach threshold limit to the user’s android phone.
 
 	Alert message is configured with ringtone and LED light notification.
 
 	Tracking the temperature and humidity in the storage facilities, patient rooms (emergency rooms) and cold cargos.
 
-	Alerting the user by sending the alert message if the temperature and humidity levels reaches the threshold point/Sending alert to the storage manager(User) about the temperature levels in the storage rooms.
 # Project Merits:
 This project will mainly help in the emergency conditions in our houses. We might not know if the temperature system fails to work in one of the room in the house in midnight time. It might lead to death conditions if temperature increases to 100F. In such conditions this application will help you by giving alert message with vibration and LED light indication.
 
