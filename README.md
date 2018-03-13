@@ -40,7 +40,7 @@ Acceptance Criteria:
 	Send an alert message/notification to the mobile whenever the temperature/humidity rises above the threshold level. 
 # Misuser Stories:
 
-# •	As a bad competitor in storage mart/ cold cargo business, I want to get access to the other strong competitor metawear device by sending multiple request, so I can destroy functioning of the device.
+•	As a bad competitor in storage mart/ cold cargo business, I want to get access to the other strong competitor metawear device by sending multiple request, so I can destroy functioning of the device.
 
 Mitigation techniques:
 
@@ -48,13 +48,13 @@ Mitigation techniques:
 
   2. To get the data, we can use web services instead of Bluetooth.
 
-# •	As a misuser, I want to sniff the data, so I can change the values in the log file.
+•	As a misuser, I want to sniff the data, so I can change the values in the log file.
 
 Mitigation techniques:
 
 o	Log files should be encrypted, so that who has no authorization cannot access the files.
 
-# •	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
+•	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
 
 Mitigation techniques:
 
