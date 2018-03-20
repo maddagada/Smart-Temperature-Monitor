@@ -49,7 +49,7 @@ Mitigation techniques:
 
 Mitigation techniques:
 
-o	Log files should be encrypted, so that who has no authorization cannot access the files.
+  1. Log files should be encrypted, so that who has no authorization cannot access the files.
 
 •	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
 
@@ -90,5 +90,6 @@ Mitigation techniques:
 | Meta wear device | Resource Drain | If the user gains pairing access to the meta wear, he can own multiple communication channels and drain the battery of the meta wear device by sending multiple of requests. | Physical access and proximity to the meta wear devices must be restricted so that the attacker will have less chance of attacking the meta wear. |
 | | Man-In-The-Middle | The attacker looks to interrupt, and sniff data transferred between two systems. | Encrypting the data. |
 | | Tampering | The attacker tries to change the working of the device. | Meta wear must be placed or stored in a secured place. |
+| | Denial of Service | The attacker tries to update the device by sending malicious firmware update. | Device firmware must be updated from the authentic or legitimate website only. |
 | Android Application | Social Engineering | Applications are vulnerable to attack through some messages or pop-up alerts. | Employees must be trained on such type of attack to get more awareness. |
-| Android device | Any vulnerability android OS has There are many vulnerabilities found with the android operating system. An attacker can access the android device many ways outside of Bluetooth to gain access to our app and can-do harm to our application. | We need to make sure, we are using latest hardware and installing all required updated all the time, so that its safe against the attacks from the attacker. |
+| Android device | Any vulnerability android OS has | There are many vulnerabilities found with the android operating system. An attacker can access the android device many ways outside of Bluetooth to gain access to our app and can-do harm to our application. | We need to make sure, we are using latest hardware and installing all required updated all the time, so that its safe against the attacks from the attacker. |
