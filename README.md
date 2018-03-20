@@ -22,7 +22,7 @@ This project will mainly help in the emergency conditions. We might not know if 
 
 # APPLICATION REQUIREMENTS
 # User Stories:
-As **wholesale club’s employee**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
+As a **user**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
 
 **Acceptance Criteria**:
 
