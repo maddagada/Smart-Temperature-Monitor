@@ -72,7 +72,7 @@ Mitigation techniques:
 
     1.3.	Other features of the android device are used, such as alerts/push notification.
 
-    1.4.	An metawear sdk (metawear interface) will be downloaded into the android device to communicate with the metawear.
+    1.4.	An metawear sdk (metawear interface) will be downloaded into the android device to communicate with the metawear(IoT) device.
 
 # 2. Metawear device:
 
