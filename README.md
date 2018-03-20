@@ -1,4 +1,4 @@
-# Smart-Temperature-Humid-Controller
+# Smart-Temperature Controller
 # Executive Summary :
 The idea behind this project is tracking and sending an alert message if the temperature levels in the cold storage facilities and cold cargos exceeds or drops the threshold point.
 This application is targeted towards wholesale clubs like Sam’s club, Costco, BJ’S. These whole sale sellers store lot of their produce in subzero conditions. To keep the produce safe, they must maintain temperature is a key. For example, milk will get rotten if they are not stored in appropriate temperature conditions. Then we need to be equipped with technology that reduces the continuous monitoring of the temperatures inside the produce storage facility.
