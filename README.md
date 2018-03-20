@@ -5,30 +5,30 @@ This application is targeted towards wholesale clubs like Sam’s club, Costco, 
 Our application can be used by wholesale clubs. keep produce safe. Instead of constantly checking for the temperatures our application will notify the user with alert message when temperature exceeds/drop the threshold limit in storage facility.
 
 # Project Goals and Objectives:
-	Develop a native app which is integrated to the metawear device (IoT device).
+* Develop a native app which is integrated to the metawear device (IoT device).
 
-	Tracking the temperature in wholesale clubs. 
+* Tracking the temperature in wholesale clubs. 
 
-	Sending alert message to the user android phone when temperature exceed the threshold limit.
+* Sending alert message to the user android phone when temperature exceed the threshold limit.
 
-	Sending alert message to the user android phone when temperature drops the threshold limit.
+* Sending alert message to the user android phone when temperature drops the threshold limit.
 
 # Project Merits:
 This project will mainly help in the emergency conditions. We might not know if the temperature system fails to work in the produce storage facility/room in the midnight time. In such conditions this application will help the user by giving alert message. Then the user can act immediately before the produce gets thawed completely or rotten.
 
-	This project is designed for multipurpose uses. This project is designed specifically to track the temperature levels in business areas like wholesale clubs. It is very useful to them because they store most part of their produce in subzero temperatures.
+* This project is designed for multipurpose uses. This project is designed specifically to track the temperature levels in business areas like wholesale clubs. It is very useful to them because they store most part of their produce in subzero temperatures.
 
-	Our application reduces the hassle of continuous checking or monitoring of temperature.
+* Our application reduces the hassle of continuous checking or monitoring of temperature.
 
 # APPLICATION REQUIREMENTS
 # User Stories:
-•	As **wholesale club’s employee**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
+* As **wholesale club’s employee**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
 
 **Acceptance Criteria**:
 
 * Track the temperature levels in timely manner.
 
-•	As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
+* As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
 
 **Acceptance Criteria**:
 
@@ -37,7 +37,7 @@ This project will mainly help in the emergency conditions. We might not know if 
 * Sending an alert message to the user’s android phone when temperature drops the threshold level. 
 # Misuser Stories:
 
-• As a **contending competitor** in wholesale club business, I wanted to **send multiple request to the competitor’s meta wear device to get access**, so that I can **destroy the proper functioning of the device**.
+* As a **contending competitor** in wholesale club business, I wanted to **send multiple request to the competitor’s meta wear device to get access**, so that I can **destroy the proper functioning of the device**.
 
 **Mitigation techniques**:
 
@@ -45,13 +45,13 @@ This project will mainly help in the emergency conditions. We might not know if 
 
   2. To get the data, we can use web services instead of Bluetooth.
 
-•	As a **misuser**, I want to **sniff the data**, so I can **change the values in the log file**.
+* As a **misuser**, I want to **sniff the data**, so I can **change the values in the log file**.
 
 **Mitigation techniques**:
 
   1. Log files should be encrypted, so that who has no authorization cannot access the files.
 
-•	As a **malicious user**, I want to **connect to the android device using any vulnerability in the android operating system**, so I can **manipulate or harm the working of the application**.
+* As a **malicious user**, I want to **connect to the android device using any vulnerability in the android operating system**, so I can **manipulate or harm the working of the application**.
 
 **Mitigation techniques**:
 
