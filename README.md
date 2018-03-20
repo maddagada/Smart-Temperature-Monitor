@@ -22,38 +22,38 @@ This project will mainly help in the emergency conditions. We might not know if 
 
 # APPLICATION REQUIREMENTS
 # User Stories:
-•	As wholesale club’s needs to store more percentage of their produce in freezing conditions, I want to know the temperature update in timely manner. So that I don’t have to bother.
+•	As **wholesale club’s employee**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
 
-Acceptance Criteria:
+**Acceptance Criteria**:
 
-	Track the temperature levels in timely manner.
+* Track the temperature levels in timely manner.
 
-•	As a user, I want to know through the alert message when something wrong with the temperature reading. So that I can act immediately before produce gets thawed or rotten.
+•	As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
 
-Acceptance Criteria:
+**Acceptance Criteria**:
 
-	Sending an alert message to the user’s android phone when the temperature exceeds the threshold point.
+* Sending an alert message to the user’s android phone when the temperature exceeds the threshold point.
 
-	Sending an alert message to the user’s android phone when temperature drops the threshold level. 
+* Sending an alert message to the user’s android phone when temperature drops the threshold level. 
 # Misuser Stories:
 
-• As a contending competitor in wholesale club business, I wanted to send multiple request to the competitor’s meta wear device to get access, so that I can destroy the proper functioning of the device.
+• As a **contending competitor** in wholesale club business, I wanted to **send multiple request to the competitor’s meta wear device to get access**, so that I can **destroy the proper functioning of the device**.
 
-Mitigation techniques:
+**Mitigation techniques**:
 
   1. Bluetooth should be turned on only whenever we required.
 
   2. To get the data, we can use web services instead of Bluetooth.
 
-•	As a misuser, I want to sniff the data, so I can change the values in the log file.
+•	As a **misuser**, I want to **sniff the data**, so I can **change the values in the log file**.
 
-Mitigation techniques:
+**Mitigation techniques**:
 
   1. Log files should be encrypted, so that who has no authorization cannot access the files.
 
-•	As a malicious user, I want to connect to the android device using any vulnerability in the android operating system, so I can manipulate or harm the working of the application.
+•	As a **malicious user**, I want to **connect to the android device using any vulnerability in the android operating system**, so I can **manipulate or harm the working of the application**.
 
-Mitigation techniques:
+**Mitigation techniques**:
 
   1. Must update the android operating system to avoid any vulnerabilities in OS.
 
