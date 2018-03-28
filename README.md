@@ -35,6 +35,13 @@ As a **user**, I want to **know through the alert message when something wrong w
 * Sending an alert message to the user’s android phone when the temperature exceeds the threshold point.
 
 * Sending an alert message to the user’s android phone when temperature drops the threshold level. 
+
+As a **user**, I want to **know the temperature reading on demand**. So that **I can know the current temperature instantly from any place when ever I want**.
+
+**Acceptance Criteria**:
+
+* Track the current temperature instantly.
+
 # Misuser Stories:
 
 As a **contending competitor** in wholesale club business, I wanted to **send multiple request to the competitor’s meta wear device to get access**, so that I can **destroy the proper functioning of the device**.
