@@ -1,5 +1,5 @@
 # Smart-Temperature-Humid-Controller
-# Executive Summary :
+# Executive  Summary :
 The idea behind this project is tracking and sending an alert message if the temperature or humidity levels in the patient’s rooms, cold storage facilities, cold cargos and finally in our own house exceeds the certain point.
 This application is very useful in many cases from general usage to industrial purpose such as in the hospitals if the patient needs to be monitored in the certain temperature conditions strictly, if the goods in the storage facility or cold cargo need to store at only certain temperature and humidity, in the houses and many other more.
 It seems interesting for me because this application serves in general purpose and industrial benefits. We have number of benefits. Temperature and Humidity should be maintained properly. Human body cannot resist to very low temperature and to hot temperatures. Humidity is also equally important to be a healthy person. If there is no moisture in the air, then it dries out our skin and leads to many skin diseases and health issues. On the other hand, this application is used in business purpose like cold cargos, storage facilities to track the temperature in the cargo or room. So that they can make sure about the conditions of goods that they stored in the room/cargo are in good condition.
