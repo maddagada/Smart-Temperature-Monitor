@@ -1,6 +1,7 @@
 # Smart Temperature Monitor 
 
-#Overview of the Application:
+# Overview of the Application:
+
 A warehouse in whole sale club retail business are used for storing medicine, food, vegetables, etc. have temperature controlled environment. In order to ensure the storage condition, it is essential to track the temperature inside the warehouse. 
 To maintain proper food safety standards in the warehouse we need a person to monitor temperature in person continuously. Instead, I am developing a native mobile application to track the temperature in the warehouse using Meta wear device. 
 To satisfy the requirements of the food storage warehouse/cold storage facility I came up with user stories initially in Milestone 1. 
