@@ -26,7 +26,7 @@
         android:id="@+id/TmpDisplay"
         android:layout_width="350dp"
         android:layout_height="450dp"
-        android:text="Hello World!"
+        android:text="Click on Start button to get current temperature"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
