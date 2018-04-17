@@ -1,4 +1,4 @@
-# Smart-Temperature Controller
+# Smart Temperature Monitor 
 # Executive Summary :
 The idea behind this project is tracking and sending an alert message if the temperature levels in the cold storage facilities and cold cargos exceeds or drops the threshold point.
 This application is targeted towards wholesale clubs like Sam’s club, Costco, BJ’S. These whole sale sellers store lot of their produce in subzero conditions. To keep the produce safe, they must maintain temperature is a key. For example, milk will get rotten if they are not stored in appropriate temperature conditions. Then we need to be equipped with technology that reduces the continuous monitoring of the temperatures inside the produce storage facility.
@@ -22,11 +22,12 @@ This project will mainly help in the emergency conditions. We might not know if 
 
 # APPLICATION REQUIREMENTS
 # User Stories:
-As a **user**, I want to **know the temperature update in timely manner**. So that **I don’t have to bother**.
+
+As a **user**, I want to **know the temperature reading on demand**. So that **I can know the current temperature instantly from any place when ever I want**.
 
 **Acceptance Criteria**:
 
-* Track the temperature levels in timely manner.
+* Track the current temperature instantly.
 
 As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
 
@@ -36,11 +37,11 @@ As a **user**, I want to **know through the alert message when something wrong w
 
 * Sending an alert message to the user’s android phone when temperature drops the threshold level. 
 
-As a **user**, I want to **know the temperature reading on demand**. So that **I can know the current temperature instantly from any place when ever I want**.
+As a **user**, I want to **download the temperature reading data file whenever I need them**. So that **I can keep track of the temperature fluctuation which helps me in making necessary changes in the facility upfront**.
 
 **Acceptance Criteria**:
 
-* Track the current temperature instantly.
+* I should be able to download the temperature reading data file.
 
 # Misuser Stories:
 
