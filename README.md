@@ -37,7 +37,7 @@ As a **user**, I want to **know through the alert message when something wrong w
 
 * Sending an alert message to the user’s android phone when temperature drops the threshold level. 
 
-As a **user**, I want to **download the temperature reading data file whenever I need them**. So that **I can keep track of the temperature fluctuation whichh helps me in making neccessary changes in the facility upfront **.
+As a **user**, I want to **download the temperature reading data file whenever I need them**. So that **I can keep track of the temperature fluctuation whichh helps me in making neccessary changes in the facility upfront**.
 
 **Acceptance Criteria**:
 
