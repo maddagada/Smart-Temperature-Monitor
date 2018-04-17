@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     private final String MW_MAC_ADDRESS= "D9:FE:65:69:EE:2F";
     static MetaWearBoard mwBoard;
     static Logging logging;
-
+    static boolean stopStream = false;
     ///Overriding onCreate method from the base class
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopStream = false;
                 readtemp();
             }
         });
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             @Override
             public void onClick(View v) {
                 logstart();
+            }
+        });
+
+        findViewById(R.id.stopStream).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView vi = (TextView)findViewById(R.id.TmpDisplay);
+                vi.setText("");
+                stopStream =  true;
             }
         });
 
@@ -169,7 +179,7 @@ public void downloaddata() {
     {
         //Creating the temperature module object from the Meta board
         Temperature temp = mwBoard.getModule(Temperature.class);
-
+        //stopStream = false;
         //Logging number of temperature sensors
         Log.i("Tempsens", String.valueOf(temp.sensors().length));
 
@@ -189,7 +199,7 @@ public void downloaddata() {
                     //Method to deal with the streamed data
                     @Override
                     public void apply(Data data, Object... env) {
-
+                        if(stopStream){return;}
                         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                         Date date = new Date();
 
@@ -248,7 +258,7 @@ public void downloaddata() {
                     //Method to deal with the streamed data
                     @Override
                     public void apply(Data data, Object... env) {
-
+                        if(stopStream){ return;}
                         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                         Date date = new Date();
 
