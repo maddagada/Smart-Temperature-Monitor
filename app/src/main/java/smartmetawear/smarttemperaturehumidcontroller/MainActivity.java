@@ -1,32 +1,23 @@
 package smartmetawear.smarttemperaturehumidcontroller;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
+
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mbientlab.metawear.CodeBlock;
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
@@ -34,6 +25,8 @@ import com.mbientlab.metawear.Subscriber;
 
 import com.mbientlab.metawear.builder.RouteBuilder;
 import com.mbientlab.metawear.builder.RouteComponent;
+import com.mbientlab.metawear.module.BarometerBosch;
+import com.mbientlab.metawear.module.Logging;
 import com.mbientlab.metawear.module.Temperature;
 import com.mbientlab.metawear.module.Temperature.SensorType;
 
@@ -44,10 +37,13 @@ import com.mbientlab.metawear.android.BtleService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Random;
-import android.support.v4.app.NotificationCompat.Builder;
+import java.util.concurrent.RecursiveAction;
+
+import com.mbientlab.metawear.module.Gpio;
+import com.mbientlab.metawear.ForcedDataProducer;
+import com.mbientlab.metawear.module.Timer;
+
 
 public class MainActivity extends AppCompatActivity implements ServiceConnection {
 
@@ -56,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     //Storing MAC address of MetaTracker, final key word will prevent this variable from updating from getting updated
     private final String MW_MAC_ADDRESS= "D9:FE:65:69:EE:2F";
     static MetaWearBoard mwBoard;
+    static Logging logging;
 
     ///Overriding onCreate method from the base class
     @Override
@@ -73,6 +70,21 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 readtemp();
             }
         });
+
+        findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloaddata();
+            }
+        });
+
+        findViewById(R.id.startLogging).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logstart();
+            }
+        });
+
     }
 
     @Override
@@ -89,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         Log.i("Temperature Monitor", "Service connected");
         /// Method to connect to the bluetooth
         connectBLE();
+        //readtemp();
     }
 
     /// connectBLE method connects device using the MAC address of the MetaTracker
@@ -113,40 +126,47 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             }
         }
         catch (InterruptedException e){}
-
-
-
-
         Log.i("Temeperature monitor", "Service Connected to ... " + MW_MAC_ADDRESS);
 
     }
     @Override
-    public void onServiceDisconnected(ComponentName componentName) { }
+    public void onServiceDisconnected(ComponentName componentName) {
+        //mwBoard.tearDown();
+    }
 
+    public void logstart()
+    {
+        logging = mwBoard.getModule(Logging.class);
+        logging.start(true);
+        logtemperature();
+    }
+    public void logstop()
+    {
+        logging.stop();
+    }
 
-    /// A method to read temperature from the Meta tracker
+public void downloaddata() {
+        if(logging != null) {
+            logging.stop();
+        }
+    logging.downloadAsync(100, new Logging.LogDownloadUpdateHandler() {
+        @Override
+        public void receivedUpdate(long nEntriesLeft, long totalEntries) {
+            Log.i("MainActivity", "Progress Update = " + nEntriesLeft + "/" + totalEntries);
+        }
+    }).continueWithTask(new Continuation<Void, Task<Void>>() {
+        @Override
+        public Task<Void> then(Task<Void> task) throws Exception {
+            Log.i("MainActivity", "Download completed");
+            logging.clearEntries();
+            return null;
+        }
+    });
+    }
+
+    // A method to read temperature from the Meta tracker
     public void readtemp()
     {
-        //final Random r = new Random();
-        //tmpDisplay.append("Temp reading at  "+ dateFormat.format(date) + x.replace('.',' ') +"\n" );
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("1", "test", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Channel");
-            // Register the channel with the system
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1")
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle("Hello")
-                    .setContentText("Temp")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            //mBuilder.notify();
-            notificationManager.notify(1,mBuilder.build());
-        }
-
-
-
         //Creating the temperature module object from the Meta board
         Temperature temp = mwBoard.getModule(Temperature.class);
 
@@ -162,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
             //Configuring the PRESET_THERMISTOR sensor
             public void configure(RouteComponent source) {
-
+//                logstart();
                 //Streams the Temperature data
                 source.stream(new Subscriber() {
 
@@ -176,26 +196,19 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                         //Getting the object TmpDisplay of type TextView
                         TextView tmpDisplay = (TextView) findViewById(R.id.TmpDisplay);
                         //tmpDisplay.append("STarting \n"  );
+                        //Temperature c = data.value(Temperature.class);
+
                         String x = "CurrentTemperature (C) = " + data.value(Float.class);
-                        //Log.i("tempsens", "Temperature1987 (C) = " + data.value(Float.class));
                         Log.i("tempsens", x );
 
                         //tmpDisplay.setText("Temp is "+ String.valueOf( r.nextFloat())  + data.value(Float.class));
-                        tmpDisplay.append("Temp reading at  "+ dateFormat.format(date) + x.replace('.',' ') +"\n" );
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            NotificationChannel channel = new NotificationChannel("1", "test", NotificationManager.IMPORTANCE_DEFAULT);
-                            channel.setDescription("Channel");
-                            // Register the channel with the system
-                            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainActivity.this, "1")
-                                    .setSmallIcon(R.drawable.ic_launcher_background)
-                                    .setContentTitle("Hello")
-                                    .setContentText("Temp")
-                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            //mBuilder.notify();
-                            notificationManager.notify(1,mBuilder.build());
+                        tmpDisplay.append("Temp reading at  "+ dateFormat.format(date) + String.valueOf(x) +"\n" );
+                        Float value = data.value(Float.class);
+                        if(value > 25 || value < 24) {
+                            String phoneNo = "515-639-0144";
+                            String message = "Temperature Alert  Current temperature reading " + value.toString();
+                            SmsManager sms = SmsManager.getDefault();
+                            sms.sendTextMessage(phoneNo, null, message, null, null);
                         }
                     }
                 });
@@ -204,10 +217,69 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             @Override
             public Void then(Task<Route> task) throws Exception {
                 tempSensor.read();
+                Log.i("task", "test");
                 return null;
             }
         });
 
     }
 
+    public void logtemperature()
+    {
+        //Creating the temperature module object from the Meta board
+        Temperature temp = mwBoard.getModule(Temperature.class);
+
+        //Logging number of temperature sensors
+        Log.i("Tempsens", String.valueOf(temp.sensors().length));
+
+        //getting the PRESET_THERMISTOR sensor. [0] gets the first PRESET_THERMISTOR sensor from the list
+        final Temperature.Sensor tempSensor = temp.findSensors(SensorType.PRESET_THERMISTOR)[0];
+
+        ///Creating a route Asynchronously to the PRESET_THERMISTOR
+        tempSensor.addRouteAsync(new RouteBuilder() {
+            @Override
+
+            //Configuring the PRESET_THERMISTOR sensor
+            public void configure(RouteComponent source) {
+//                logstart();
+                //Streams the Temperature data
+                source.log(new Subscriber() {
+
+                    //Method to deal with the streamed data
+                    @Override
+                    public void apply(Data data, Object... env) {
+
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        Date date = new Date();
+
+                        //Getting the object TmpDisplay of type TextView
+                        TextView tmpDisplay = (TextView) findViewById(R.id.TmpDisplay);
+                        //tmpDisplay.append("STarting \n"  );
+                        //Temperature c = data.value(Temperature.class);
+
+                        String x = "CurrentTemperature (C) = " + data.value(Float.class);
+                        Log.i("tempsens", x );
+
+                        //tmpDisplay.setText("Temp is "+ String.valueOf( r.nextFloat())  + data.value(Float.class));
+                        tmpDisplay.append("log reading at  "+ dateFormat.format(date) + String.valueOf(x) +"\n" );
+                        Float value = data.value(Float.class);
+                        if(value > 25 || value < 24) {
+                            String phoneNo = "515-639-0144";
+                            String message = "Temperature log Alert  Current temperature reading " + value.toString();
+                            SmsManager sms = SmsManager.getDefault();
+                            sms.sendTextMessage(phoneNo, null, message, null, null);
+                        }
+                    }
+                });
+            }
+        }).continueWith(new Continuation<Route, Void>() {
+            @Override
+            public Void then(Task<Route> task) throws Exception {
+                tempSensor.read();
+                Log.i("task", "test");
+                return null;
+            }
+        });
+
+    }
 }

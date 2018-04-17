@@ -8,13 +8,13 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="368dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="START"
+        android:text="Get Current Temperature"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,11 +22,45 @@
         app:layout_constraintTop_toBottomOf="@+id/TmpDisplay"
         app:layout_constraintVertical_bias="0.829" />
 
+    <Button
+        android:id="@+id/downloadButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:text="Download"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+    <Button
+        android:id="@+id/startLogging"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:text="Start Loggin data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/downloadButton"
+
+        />
+
+    <Button
+        android:id="@+id/stopStream"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:text="Stop Stream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/TmpDisplay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+
+        />
+
     <TextView
         android:id="@+id/TmpDisplay"
         android:layout_width="350dp"
         android:layout_height="450dp"
-        android:text="Click on Start button to get current temperature"
+        android:text=""
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
