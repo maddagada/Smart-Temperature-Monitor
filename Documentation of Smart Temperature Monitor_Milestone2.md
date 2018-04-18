@@ -4,17 +4,20 @@
 
 A warehouse in whole sale club retail business are used for storing medicine, food, vegetables, etc. have temperature controlled environment. In order to ensure the storage condition, it is essential to track the temperature inside the warehouse. 
 To maintain proper food safety standards in the warehouse we need a person to monitor temperature in person continuously. Instead, I am developing a native mobile application to track the temperature in the warehouse using Meta wear device. 
-To satisfy the requirements of the food storage warehouse/cold storage facility I came up with user stories initially in Milestone 1. 
 
-In Milestone 2, I started working on the user stories to implement them practically. Below are the user stories which I accomplished successfully. 
+To satisfy the requirements of the food storage warehouse/cold storage facility I came up with user stories initially in Milestone 1.
+
+In Milestone 2, I started working on the user stories to implement them practically. Below are the user stories which I accomplished successfully.
+
 
 # User Story 1:
 
-As a **user**, I want to **know the temperature reading on demand**. So that I can **see the temperature in the facility from anywhere whenever I want**.
+As a **user**, I want to **know the temperature reading on demand**. So that I can **track the temperature whenever I want instantly**.
 
-* Track the current temperature instantly.
+* Streaming the current temperature readings continuously until user stop streaming.
 
 # User Story 2:
+
 As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
 
 * Sending an alert message to the user’s android phone when the temperature exceeds the threshold point.
@@ -29,5 +32,11 @@ As a **user**, I want to **download the file of temperature reading whenever I n
 
 # CODE ARTIFACTS:
 
-Code
+[Code](https://github.com/maddagada/Smart-Temperature-Humid-Controller/blob/master/app/src/main/java/smartmetawear/smarttemperaturehumidcontroller/MainActivity.java)
+
+# Further Tasks and Enhancements:
+
+* Completing the User story 3.
+* Enhancing the look of UI
+* Bug fix
 
