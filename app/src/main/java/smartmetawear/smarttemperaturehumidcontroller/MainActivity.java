@@ -3,6 +3,7 @@ package smartmetawear.smarttemperaturehumidcontroller;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
@@ -35,6 +36,9 @@ import bolts.Task;
 
 import com.mbientlab.metawear.android.BtleService;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //downloadfile();
                 downloaddata();
             }
         });
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 logstart();
             }
         });
-
+        // OnClick event for the stop streaming data.
         findViewById(R.id.stopStream).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +151,8 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
     public void logstart()
     {
+        TextView t = (TextView) (findViewById(R.id.TmpDisplay));
+                t.setText("\n Started Logging. Press download button to stop logging on the sensor and download the file \n");
         logging = mwBoard.getModule(Logging.class);
         logging.start(true);
         logtemperature();
@@ -155,13 +162,33 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         logging.stop();
     }
 
+    public void downloadfile()
+    {
+        try {
+            ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+            File directory = contextWrapper.getDir("Documents", Context.MODE_PRIVATE);
+            String filename = "meta-chmou.txt";
+
+            File myInternalFile = new File(directory , filename);
+            FileOutputStream fos = new FileOutputStream(myInternalFile);
+
+            fos.write(((TextView)findViewById(R.id.TmpDisplay)).getText().toString().getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 public void downloaddata() {
         if(logging != null) {
             logging.stop();
         }
+
     logging.downloadAsync(100, new Logging.LogDownloadUpdateHandler() {
         @Override
         public void receivedUpdate(long nEntriesLeft, long totalEntries) {
+            TextView t = (TextView) (findViewById(R.id.TmpDisplay));
+            t.setText("\n"+ totalEntries +" log entries written to the file. \n");
+
             Log.i("MainActivity", "Progress Update = " + nEntriesLeft + "/" + totalEntries);
         }
     }).continueWithTask(new Continuation<Void, Task<Void>>() {
@@ -214,7 +241,7 @@ public void downloaddata() {
                         //tmpDisplay.setText("Temp is "+ String.valueOf( r.nextFloat())  + data.value(Float.class));
                         tmpDisplay.append("Temp reading at  "+ dateFormat.format(date) + String.valueOf(x) +"\n" );
                         Float value = data.value(Float.class);
-                        if(value > 25 || value < 24) {
+                        if(value < 24 || value > 23) {
                             String phoneNo = "515-639-0144";
                             String message = "Temperature Alert  Current temperature reading " + value.toString();
                             SmsManager sms = SmsManager.getDefault();
@@ -272,6 +299,7 @@ public void downloaddata() {
 
                         //tmpDisplay.setText("Temp is "+ String.valueOf( r.nextFloat())  + data.value(Float.class));
                         tmpDisplay.append("log reading at  "+ dateFormat.format(date) + String.valueOf(x) +"\n" );
+                        // Alert the user when threshold limit exceeds or drop the value.
                         Float value = data.value(Float.class);
                         if(value > 25 || value < 24) {
                             String phoneNo = "515-639-0144";

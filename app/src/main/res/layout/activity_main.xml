@@ -34,9 +34,9 @@
     <Button
         android:id="@+id/startLogging"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
-        android:text="Start Loggin data"
+        android:text="Start Logging Data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/downloadButton"
 
