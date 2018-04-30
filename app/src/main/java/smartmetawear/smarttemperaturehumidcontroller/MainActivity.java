@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.os.Environment;
 
 import com.mbientlab.metawear.CodeBlock;
 import com.mbientlab.metawear.Data;
@@ -79,8 +81,14 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //downloadfile();
-                downloaddata();
+                try {
+                    //downloadfile();
+                    downloaddata();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -178,27 +186,54 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             e.printStackTrace();
         }
     }
-public void downloaddata() {
+public void downloaddata() throws IOException {
         if(logging != null) {
             logging.stop();
         }
 
-    logging.downloadAsync(100, new Logging.LogDownloadUpdateHandler() {
-        @Override
-        public void receivedUpdate(long nEntriesLeft, long totalEntries) {
-            TextView t = (TextView) (findViewById(R.id.TmpDisplay));
-            t.setText("\n"+ totalEntries +" log entries written to the file. \n");
+    String fileName = "METAWEAR.csv";
+    final File path = new File(Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS), fileName);
 
-            Log.i("MainActivity", "Progress Update = " + nEntriesLeft + "/" + totalEntries);
-        }
-    }).continueWithTask(new Continuation<Void, Task<Void>>() {
-        @Override
-        public Task<Void> then(Task<Void> task) throws Exception {
-            Log.i("MainActivity", "Download completed");
-            logging.clearEntries();
-            return null;
-        }
-    });
+    File file = new File(Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS), "/" + fileName);
+    file.createNewFile();
+    FileOutputStream outputStream = null;
+
+    outputStream = new FileOutputStream(file, true);
+    outputStream.write(( "Hello World,"+ "\n").getBytes());
+    //for (int i = 0; i<pressureData.size() ; i++){
+    //    outputStream.write((pressureData.get(i) + ","+ "\n").getBytes());
+    //}
+    outputStream.close();
+
+    Intent intent = new Intent(Intent.ACTION_SENDTO);
+    intent.setType("text/plain");
+    String message="File to be shared is .";
+    intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+    intent.putExtra(Intent.EXTRA_STREAM, Uri.parse( "file://"+file.getPath()));
+    intent.putExtra(Intent.EXTRA_TEXT, message);
+    intent.setData(Uri.parse("mailto:bharataddagada@gmail.com"));
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+    startActivity(intent);
+
+    //logging.downloadAsync(100, new Logging.LogDownloadUpdateHandler() {
+      //  @Override
+    //    public void receivedUpdate(long nEntriesLeft, long totalEntries) {
+    //        TextView t = (TextView) (findViewById(R.id.TmpDisplay));
+    //        t.setText("\n"+ totalEntries +" log entries written to the file. \n");
+
+     //       Log.i("MainActivity", "Progress Update = " + nEntriesLeft + "/" + totalEntries);
+     //   }
+    //}).continueWithTask(new Continuation<Void, Task<Void>>() {
+      //  @Override
+     //   public Task<Void> then(Task<Void> task) throws Exception {
+     //       Log.i("MainActivity", "Download completed");
+     //       logging.clearEntries();
+        //    return null;
+      //  }
+    //});
     }
 
     // A method to read temperature from the Meta tracker
