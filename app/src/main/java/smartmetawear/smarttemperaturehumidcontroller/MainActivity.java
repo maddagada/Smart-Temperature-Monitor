@@ -28,7 +28,6 @@ import com.mbientlab.metawear.Subscriber;
 
 import com.mbientlab.metawear.builder.RouteBuilder;
 import com.mbientlab.metawear.builder.RouteComponent;
-import com.mbientlab.metawear.module.BarometerBosch;
 import com.mbientlab.metawear.module.Logging;
 import com.mbientlab.metawear.module.Temperature;
 import com.mbientlab.metawear.module.Temperature.SensorType;
@@ -44,11 +43,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.RecursiveAction;
-
-import com.mbientlab.metawear.module.Gpio;
-import com.mbientlab.metawear.ForcedDataProducer;
-import com.mbientlab.metawear.module.Timer;
 
 
 public class MainActivity extends AppCompatActivity implements ServiceConnection {
@@ -60,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     static MetaWearBoard mwBoard;
     static Logging logging;
     static boolean stopStream = false;
+    private String fileName= "";
+    private File file;
     ///Overriding onCreate method from the base class
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,16 +91,33 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         findViewById(R.id.startLogging).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logstart();
+                try {
+                    downloaddata();
+                    SendEmail();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
+
         // OnClick event for the stop streaming data.
         findViewById(R.id.stopStream).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView vi = (TextView)findViewById(R.id.TmpDisplay);
-                vi.setText("");
+                //vi.setText("");
                 stopStream =  true;
+            }
+        });
+
+        // OnClick event for the stop streaming data.
+        findViewById(R.id.Clear).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView vi = (TextView)findViewById(R.id.TmpDisplay);
+                vi.setText("");
+                //stopStream =  true;
             }
         });
 
@@ -113,10 +126,10 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         ///< Unbind the service when the activity is destroyed
         getApplicationContext().unbindService(this);
     }
+
     //Override method for onServiceConnected
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
@@ -157,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         //mwBoard.tearDown();
     }
 
+    //Method to start logging data on the device
     public void logstart()
     {
         TextView t = (TextView) (findViewById(R.id.TmpDisplay));
@@ -165,11 +179,13 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         logging.start(true);
         logtemperature();
     }
+    //Method to stop logging data on the device
     public void logstop()
     {
         logging.stop();
     }
 
+    //Method to download logged data from the device. Not using this method as device memory is low.
     public void downloadfile()
     {
         try {
@@ -186,54 +202,43 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             e.printStackTrace();
         }
     }
-public void downloaddata() throws IOException {
-        if(logging != null) {
+
+    public void downloaddata() throws IOException {
+        if (logging != null) {
             logging.stop();
         }
 
-    String fileName = "METAWEAR.csv";
-    final File path = new File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_DOWNLOADS), fileName);
+        Date td = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd'-'hh:mm:ss");
 
-    File file = new File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_DOWNLOADS), "/" + fileName);
-    file.createNewFile();
-    FileOutputStream outputStream = null;
+        fileName = "METAWEARE_READING_" + ft.format(td) + ".csv";
 
-    outputStream = new FileOutputStream(file, true);
-    outputStream.write(( "Hello World,"+ "\n").getBytes());
-    //for (int i = 0; i<pressureData.size() ; i++){
-    //    outputStream.write((pressureData.get(i) + ","+ "\n").getBytes());
-    //}
-    outputStream.close();
+        file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS), "/" + fileName);
+        file.createNewFile();
+        FileOutputStream outputStream = null;
 
-    Intent intent = new Intent(Intent.ACTION_SENDTO);
-    intent.setType("text/plain");
-    String message="File to be shared is .";
-    intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-    intent.putExtra(Intent.EXTRA_STREAM, Uri.parse( "file://"+file.getPath()));
-    intent.putExtra(Intent.EXTRA_TEXT, message);
-    intent.setData(Uri.parse("mailto:bharataddagada@gmail.com"));
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        outputStream = new FileOutputStream(file, true);
+        TextView t = (TextView) findViewById(R.id.TmpDisplay);
 
-    startActivity(intent);
+        outputStream.write((t.getText().toString()).getBytes());
+        outputStream.close();
+    }
 
-    //logging.downloadAsync(100, new Logging.LogDownloadUpdateHandler() {
-      //  @Override
-    //    public void receivedUpdate(long nEntriesLeft, long totalEntries) {
-    //        TextView t = (TextView) (findViewById(R.id.TmpDisplay));
-    //        t.setText("\n"+ totalEntries +" log entries written to the file. \n");
+    //Method to send email with an attachment of temperature readings
+    // Some has to explicitly click send in order to send the email, its a security measure of the android system.
+    public void SendEmail()
+    {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        String message="File to be shared is .";
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Metware Report");
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse( "file://"+file.getPath()));
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setData(Uri.parse("mailto:ch.mounikachowdary@gmail.com"));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-     //       Log.i("MainActivity", "Progress Update = " + nEntriesLeft + "/" + totalEntries);
-     //   }
-    //}).continueWithTask(new Continuation<Void, Task<Void>>() {
-      //  @Override
-     //   public Task<Void> then(Task<Void> task) throws Exception {
-     //       Log.i("MainActivity", "Download completed");
-     //       logging.clearEntries();
-        //    return null;
-      //  }
-    //});
+        startActivity(intent);
     }
 
     // A method to read temperature from the Meta tracker
@@ -267,16 +272,14 @@ public void downloaddata() throws IOException {
 
                         //Getting the object TmpDisplay of type TextView
                         TextView tmpDisplay = (TextView) findViewById(R.id.TmpDisplay);
-                        //tmpDisplay.append("STarting \n"  );
-                        //Temperature c = data.value(Temperature.class);
 
-                        String x = "CurrentTemperature (C) = " + data.value(Float.class);
+                        String x = " (C) = " + data.value(Float.class);
                         Log.i("tempsens", x );
 
                         //tmpDisplay.setText("Temp is "+ String.valueOf( r.nextFloat())  + data.value(Float.class));
                         tmpDisplay.append("Temp reading at  "+ dateFormat.format(date) + String.valueOf(x) +"\n" );
                         Float value = data.value(Float.class);
-                        if(value < 24 || value > 23) {
+                        if(value < 21 || value > 24) {
                             String phoneNo = "515-639-0144";
                             String message = "Temperature Alert  Current temperature reading " + value.toString();
                             SmsManager sms = SmsManager.getDefault();
