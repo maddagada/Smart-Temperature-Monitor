@@ -28,6 +28,7 @@ As a **user**, I want to **know the temperature reading on demand**. So that **I
 **Acceptance Criteria**:
 
 * Track the current temperature instantly.
+* Stream the temperature reading untill stop streaming the temperature.
 
 As a **user**, I want to **know through the alert message when something wrong with the temperature reading**. So that I can **act immediately before produce gets thawed or rotten**.
 
