@@ -129,6 +129,7 @@ As a **malicious user**, I want to **connect to the android device using any vul
  **Procedure 2:**
  * Since, I packaged my app into .apk. The one who is willing to install my app can download .apk file directly through this link [.apk file](https://github.com/maddagada/Smart-Temperature-Monitor/blob/master/SmartTemperatureMonitor.apk).
  * Open the downloaded .apk file and install into the android device.
+ 
  **NOTE:** Prior to the installing of app check the **Settings > Security > Unknown sources**. Check this **Unknown sources** to allow your phone to install apps from other sources than legitimate sites like Google Play store.
  
 ## Getting Started Directions:
