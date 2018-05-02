@@ -139,3 +139,7 @@ As a **malicious user**, I want to **connect to the android device using any vul
  * Click on the CLEAR/RESET button to clear the previously streamed data.
  * If you want to download the streamed data till the time, click on the DOWNLOAD button. It will download the file into your device.
  * If you want to share the streamed data as a file to others, click on EMAIL REPORT button. It will take you to compose mail window in which the file to be shared is attached.
+ 
+## Presentation Slides:
+[SMART TEMPERATURE MONITOR](https://docs.google.com/presentation/d/1rRhTSJE0NhSOFa2noxiSdhCu5PUF9eCVwRXqJeJ2BHo/edit#slide=id.p1)
+
