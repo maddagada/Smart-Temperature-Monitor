@@ -123,7 +123,8 @@ As a **malicious user**, I want to **connect to the android device using any vul
 **To install my app in any android device, follow the below either of the procedure.**
 
 **Procedure 1:**
- * The one who is willing to install my app, they can clone my repository through the link [Clone Repository]  (https://github.com/maddagada/Smart-Temperature-Monitor.git)
+ * The one who is willing to install my app, they can clone my repository through the link 
+ [Clone Repository](https://github.com/maddagada/Smart-Temperature-Monitor.git)
  * Open the cloned project in Android studio and Rebuild the project.
  * Run the app on android device through Android Device Bridge.
  
