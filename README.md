@@ -115,7 +115,7 @@ As a **malicious user**, I want to **connect to the android device using any vul
  * Meta wear interface
  * Android SDK interface
  * Thermistor(Temperature Sensor in the Meta wear device)
- * Android 4.4+ (API Level 26) with Bluetooth LE capable smart phone or tablet
+ * Android 4.4+ (API Level 18+) with Bluetooth LE capable smart phone or tablet
  * Downloaded [Android Studios](https://developer.android.com/studio/)
  * Downloaded [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
  
