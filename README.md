@@ -23,7 +23,7 @@ This project will mainly help in the emergency conditions. We might not know if 
 # APPLICATION REQUIREMENTS
 # User Stories:
 
-As a **user**, I want to **know the temperature reading on demand**. So that **I can know the current temperature instantly from any place when ever I want**.
+As a **user**, I want to **know the temperature reading on demand**. So that **I can know the current temperature instantly when ever I want**.
 
 **Acceptance Criteria**:
 
@@ -42,6 +42,12 @@ As a **user**, I want to **download the temperature reading data file whenever I
 **Acceptance Criteria**:
 
 * I should be able to download the temperature reading data file.
+
+As a **user**, I want to **share the streamed temperature data file with others whenever I need**. So that **I can inform appropriate members about the temperature fluctuation readings**.
+
+**Acceptance Criteria**:
+
+* I should be able to share the temperature reading data file through email.
 
 # Misuser Stories:
 
@@ -101,3 +107,34 @@ As a **malicious user**, I want to **connect to the android device using any vul
 | | Denial of Service | The attacker tries to update the device by sending malicious firmware update. | Device firmware must be updated from the authentic or legitimate website only. |
 | Android Application | Social Engineering | Applications are vulnerable to attack through some messages or pop-up alerts. | Employees must be trained on such type of attack to get more awareness. |
 | Android device | Any vulnerability android OS has | There are many vulnerabilities found with the android operating system. An attacker can access the android device many ways outside of Bluetooth to gain access to our app and can-do harm to our application. | We need to make sure, we are using latest hardware and installing all required updated all the time, so that its safe against the attacks from the attacker. |
+
+## Hardware/Software Requirements:
+ * Metawear device
+ * Android device
+ * Meta wear interface
+ * Android SDK interface
+ * Thermistor(Temperature Sensor in the Meta wear device)
+ * Android 4.4+ (API Level 26) with Bluetooth LE capable smart phone or tablet
+ * Downloaded [Android Studios](https://developer.android.com/studio/)
+ * Downloaded [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+ 
+## Installation Directions:
+
+**To install my app in any android device, follow the below either of the procedure.**
+**Procedure 1:**
+ * The one who is willing to install my app, they can clone my repository through the link [Clone Repository]  (https://github.com/maddagada/Smart-Temperature-Monitor.git)
+ * Open the cloned project in Android studio and Rebuild the project.
+ * Run the app on android device through Android Device Bridge.
+ 
+ **Procedure 2:**
+ * Since, I packaged my app into .apk. The one who is willing to install my app can download .apk file directly through this link [.apk file](https://github.com/maddagada/Smart-Temperature-Monitor/blob/master/SmartTemperatureMonitor.apk).
+ * Open the downloaded .apk file and install into the android device.
+ **NOTE:** Prior to the installing of app check the **Settings > Security > Unknown sources**. Check this **Unknown sources** to allow your phone to install apps from other sources than legitimate sites like Google Play store.
+ 
+## Getting Started Directions:
+ * When you open the app you will see START STREAM, STOP STREM, DOWNLOAD, EMAIL REPORT, CLEAR/RESET buttons on your welcome page.
+ * If you want to stream the data continuously for an amount of time, click on the START STREAM button.
+ * If you want to stop the streaming data, click on the STOP STREAM button.
+ * Click on the CLEAR/RESET button to clear the previously streamed data.
+ * If you want to download the streamed data till the time, click on the DOWNLOAD button. It will download the file into your device.
+ * If you want to share the streamed data as a file to others, click on EMAIL REPORT button. It will take you to compose mail window in which the file to be shared is attached.
